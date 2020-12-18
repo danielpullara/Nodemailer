@@ -1,6 +1,6 @@
 var Promise = require('promise');
 var readFile = Promise.denodeify(require('fs').readFile);
-
+const path = require('path');
 
 module.exports = {
     buyAnIphone: (iphoneName) => {
@@ -19,8 +19,7 @@ module.exports = {
         });
     },
     readJsonFile: (jsonFileName) => {
-        return readFile(jsonFileName, 'utf8').then((response) => {
-            return JSON.parse(response);
-        });
+        const filePath = path.join(__dirname, jsonFileName);
+        return require(filePath);
     }
 };
